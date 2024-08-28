@@ -114,10 +114,10 @@ struct _EGLDisplay *ws_GetDisplay(EGLNativeDisplayType display)
 void ws_Terminate(struct _EGLDisplay *dpy)
 {
 	pthread_mutex_lock(&mutex);
-	if (ws_init_count > 0) {
+	if (ws_init_count == 1)
 		ws->Terminate(dpy);
+	if (ws_init_count > 0)
 		ws_init_count--;
-	}
 	pthread_mutex_unlock(&mutex);
 }
 
